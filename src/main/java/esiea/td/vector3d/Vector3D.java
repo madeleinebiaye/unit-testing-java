@@ -39,6 +39,11 @@ public class Vector3D extends Entity3D{
     /// <see cref="https://mathinsight.org/definition/magnitude_vector"/>
     /// <returns>Vector length</returns>
     public double Length(){
-        return Math.sqrt(getX() * getX() + getY() * getX() + getZ() * getX());
-    }
+    return Math.sqrt(
+        getX() * getX() +
+        getY() * getY() +
+        getZ() * getZ()
+    );
+}
+
 }
