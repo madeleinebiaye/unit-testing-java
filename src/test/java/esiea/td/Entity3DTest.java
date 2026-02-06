@@ -57,7 +57,6 @@ public class Entity3DTest {
         Entity3D target = new Entity3D();
 
         target.Scale(3, base);
-
         assertEquals(3, target.getX());
         assertEquals(6, target.getY());
         assertEquals(9, target.getZ());
