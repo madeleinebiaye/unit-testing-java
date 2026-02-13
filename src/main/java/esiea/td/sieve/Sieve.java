@@ -1,30 +1,42 @@
 package esiea.td.sieve;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Sieve {
 
-    public static List<Integer> GetAllPrimeNumbers(int upToNumber){
-        List<Integer> workingList = new ArrayList<>();
-        for (int i = 2; i < upToNumber + 2; i++) {
-        workingList.add(i);
+    public static List<Integer> GetAllPrimeNumbers(int upToNumber) {
+
+        // Cas limite
+        if (upToNumber < 2) {
+            return new ArrayList<>();
         }
 
-        int marked = 0;
-        int currentPrime = 1;
-        while (marked < workingList.size() - 1){
-            for (int number = 2; number < workingList.size(); number++)
-            {
-                if (workingList.contains(currentPrime * number))
-                {
-                    workingList.remove(currentPrime * number);
+        // Tableau pour marquer les nombres premiers
+        boolean[] isPrime = new boolean[upToNumber + 1];
+
+        // Initialisation : on suppose que tous les nombres >= 2 sont premiers
+        for (int i = 2; i <= upToNumber; i++) {
+            isPrime[i] = true;
+        }
+
+        // Crible d’Ératosthène
+        for (int i = 2; i * i <= upToNumber; i++) {
+            if (isPrime[i]) {
+                for (int j = i * i; j <= upToNumber; j += i) {
+                    isPrime[j] = false;
                 }
             }
-
-            marked++;
-            currentPrime = workingList.get(marked);
         }
 
-        return workingList;
+        // Construction de la liste résultat
+        List<Integer> result = new ArrayList<>();
+        for (int i = 2; i <= upToNumber; i++) {
+            if (isPrime[i]) {
+                result.add(i);
+            }
+        }
+
+        return result;
     }
 }
