@@ -1,25 +1,35 @@
 package esiea.td.mock;
+
 import esiea.td.model.Image;
 
 public class DigitalCameraMock implements IDigitalCamera {
 
-    private boolean isFlashOn = false;
+    private boolean flashOn = false;
+    private boolean snapshotTaken = false;
 
     @Override
-    public Image TakeSnapshot() {
-        // TODO This would connect to the real camera and take a picture
-        return null;
-    }
+public Image TakeSnapshot() {
+    snapshotTaken = true;
+    return new Image();   // ← ICI on enlève le paramètre
+}
+
+
 
     @Override
     public void FlashlightOn() {
-        // TODO This would connect to the real camera and set the flash light on
-        isFlashOn = true;
+        flashOn = true;
     }
 
     @Override
     public void FlashlightOff() {
-        // TODO This would connect to the real camera and set the flash light off
-        isFlashOn = false;
+        flashOn = false;
+    }
+
+    public boolean isFlashOn() {
+        return flashOn;
+    }
+
+    public boolean isSnapshotTaken() {
+        return snapshotTaken;
     }
 }
